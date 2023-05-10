@@ -6,9 +6,11 @@
 
 :custom
 clear custom_choice
-menu UCS Servers
+menu UCS C220 Servers
 item --gap UPGRADES!
-item option_one ${space} M4 Firmware Upgrade 4.1.2g
+item option_one ${space} M4 4.1.2g
+item option_two ${space} M3 3.0.4s
+
 choose custom_choice || goto custom_exit
 echo ${cls}
 goto ${custom_choice}
@@ -18,6 +20,12 @@ goto custom_exit
 kernel https://boot.netboot.xyz/memdisk raw iso
 initrd https://selfservelabs.cisco.com/static/iso/ucs-c220m4-huu-4.1.2g.iso
 boot || goto custom_exit
+
+:option_two
+kernel https://boot.netboot.xyz/memdisk raw iso
+initrd https://selfservelabs.cisco.com/static/iso/ucs-c220-huu-3.0.4s.iso
+boot || goto custom_exit
+
 
 :custom_exit
 exit 0
