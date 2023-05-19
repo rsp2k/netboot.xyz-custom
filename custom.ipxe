@@ -20,9 +20,6 @@ echo ${cls}
 goto ${custom_choice}
 goto custom_exit
 
-
-autoinstall ds=nocloud-net
-
 :option_one
 kernel https://boot.netboot.xyz/memdisk raw iso
 initrd https://selfservelabs.cisco.com/static/iso/ucs-c220m4-huu-4.1.2g.iso
