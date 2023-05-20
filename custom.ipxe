@@ -11,48 +11,36 @@ item --gap Cisco UCS Servers
 item option_one ${space} M4 4.1.2g
 item option_two ${space} M3 3.0.4s
 item --gap VMWare ESXi
-item esxi_iso_boot ${space} 7 (iso)
-item esxi_efi_boot ${space} 7.0 (efi)
-item esxi_legacy_boot ${space} 7.0 (legacy boot)
+item esxi_70 ${space} 7 (iso)
+item esxi_67 ${space} 6.7 (iso)
 item --gap Windows
-item win10_boot ${space} Windows 10
+item win_10 ${space} Windows 10
 choose custom_choice || goto custom_exit
 echo ${cls}
 goto ${custom_choice}
 goto custom_exit
 
 :option_one
-kernel https://boot.netboot.xyz/memdisk raw iso
+kernel  iso raw
 initrd https://selfservelabs.cisco.com/static/iso/ucs-c220m4-huu-4.1.2g.iso
 boot || goto custom_exit
 
 :option_two
-kernel https://boot.netboot.xyz/memdisk raw iso
+kernel iso raw
 initrd https://selfservelabs.cisco.com/static/iso/ucs-c220-huu-3.0.4s.iso
 boot || goto custom_exit
 
-:esxi_iso_boot
-set iso_url http://ssh.supported.systems/esxi/7.iso
+:esxi_70
 kernel  iso raw
-initrd ${iso_url}
+initrd http://ssh.supported.systems/esxi/7.iso
 boot || goto custom_exit
 
-:esxi_efi_boot
-imgfree
-kernel http://ssh.supported.systems/esxi/7/efi/boot/bootx64.efi -c http://ssh.supported.systems/esxi/7/boot.cfg
-initrd http://ssh.supported.systems/esxi/7/efi/boot/efi/boot/crypto64.efi
-goto esxi_boot
-
-:esxi_legacy_boot
-imgfree
-kernel http://ssh.supported.systems/esxi/7/mboot.c32 -c http://ssh.supported.systems/esxi/7/boot.cfg
-goto esxi_boot
-
-:esxi_boot
-md5sum bootx64.efi
+:esxi_67
+kernel  iso raw
+initrd http://ssh.supported.systems/esxi/6.7.iso
 boot || goto custom_exit
 
-:win10_boot
+:win_10
 set win_base_url http://ssh.supported.systems/win10
 set win_arch x64
 
