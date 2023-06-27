@@ -10,6 +10,7 @@ menu Installers
 item --gap Cisco UCS Servers
 item option_one ${space} M4 4.1.2g
 item option_two ${space} M3 3.0.4s
+item option_three ${space} C240M5 4.2.3e
 item --gap VMWare ESXi
 item esxi_70 ${space} 7 (iso)
 item esxi_67 ${space} 6.7 (iso)
@@ -28,6 +29,11 @@ boot || goto custom_exit
 :option_two
 kernel iso raw
 initrd https://selfservelabs.cisco.com/static/iso/ucs-c220-huu-3.0.4s.iso
+boot || goto custom_exit
+
+:option_three
+kernel iso raw
+initrd https://selfservelabs.cisco.com/static/iso/ucs-c240m5-huu-4.2.3e.iso
 boot || goto custom_exit
 
 :esxi_70
