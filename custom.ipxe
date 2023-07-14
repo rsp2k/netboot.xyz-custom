@@ -11,9 +11,9 @@ item --gap Cisco UCS Servers
 item option_one ${space} M4 4.1.2g
 item option_two ${space} M3 3.0.4s
 item option_three ${space} C240M5 4.2.3e
+item option_four ${space} C3160 2.0.4c-1
 item --gap VMWare ESXi
 item esxi_70 ${space} 7 (iso)
-item esxi_67 ${space} 6.7 (iso)
 item --gap Windows
 item win_10 ${space} Windows 10
 choose custom_choice || goto custom_exit
@@ -36,14 +36,14 @@ kernel iso raw
 initrd https://selfservelabs.cisco.com/static/iso/ucs-c240m5-huu-4.2.3e.iso
 boot || goto custom_exit
 
-:esxi_70
-kernel  iso raw
-initrd http://ssh.supported.systems/esxi/7.iso
+:option_four
+kernel iso raw
+initrd https://selfservelabs.cisco.com/static/iso/ucs-c3160-huu-2.0.4c-1.iso
 boot || goto custom_exit
 
-:esxi_67
+:esxi_70
 kernel  iso raw
-initrd http://ssh.supported.systems/esxi/6.7.iso
+initrd http://selfservelabs.cisco.com/static/iso/VMware-VMvisor-Installer-7.0U3g-20328353.x86_64.iso
 boot || goto custom_exit
 
 :win_10
